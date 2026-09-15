@@ -1,0 +1,75 @@
+generated: '2026-09-15'
+method: derived
+source: >-
+  Bound the 18 tools published in https://github.com/zarelan/rubiconnect-mcp README against the
+  5 operations in openapi/rubiconnect-openapi.json. The live MCP schema is auth-gated (HTTP 401),
+  so bindings are by name/semantics with honest confidence.
+surfaces:
+  openapi: openapi/rubiconnect-openapi.json
+  mcp: https://console.rubiconnect.com/api/mcp
+  mcp_gated: true
+  note: >-
+    The REST OpenAPI publishes only 4 callable operations plus a webhook receiver; the MCP server
+    exposes 18 tools, so most tools have no public REST equivalent and are mcp_only.
+crosswalk:
+  - tool: check_capability
+    category: messaging
+    rest: [checkCapability]
+    binding: direct
+    confidence: high
+  - tool: send_message
+    category: messaging
+    rest: [sendMessage]
+    binding: direct
+    confidence: high
+  - tool: create_campaign
+    category: campaigns
+    rest: [createCampaign]
+    binding: direct
+    confidence: high
+  - tool: get_campaign_status
+    category: campaigns
+    rest: [getCampaign]
+    binding: direct
+    confidence: high
+  - tool: get_campaign_performance
+    category: campaigns
+    rest: [getCampaign]
+    binding: semantic
+    confidence: medium
+    note: getCampaign returns campaign stats; performance metrics likely a projection of the same operation.
+mcp_only:
+  - tool: get_inbox_messages
+    reason: No public REST inbox-read operation in the OpenAPI.
+  - tool: get_conversation_history
+    reason: No public REST conversation-history operation in the OpenAPI.
+  - tool: list_campaigns
+    reason: OpenAPI exposes GET /campaigns as single-campaign query only; no list operation.
+  - tool: list_templates
+    reason: No public REST template operation in the OpenAPI.
+  - tool: get_template_detail
+    reason: No public REST template operation in the OpenAPI.
+  - tool: create_template
+    reason: No public REST template operation in the OpenAPI.
+  - tool: submit_template_to_meta
+    reason: No public REST template operation in the OpenAPI.
+  - tool: list_agents
+    reason: No public REST agent operation in the OpenAPI.
+  - tool: get_agent_profile
+    reason: No public REST agent operation in the OpenAPI.
+  - tool: get_message_stats
+    reason: No public REST analytics operation in the OpenAPI.
+  - tool: get_server_status
+    reason: No public REST status operation in the OpenAPI.
+  - tool: search_images
+    reason: No public REST media-search operation in the OpenAPI.
+  - tool: search_documentation
+    reason: No public REST documentation-search operation in the OpenAPI.
+rest_only: []
+coverage:
+  mcp_tools: 18
+  rest_operations: 4
+  mapped_high: 4
+  mapped_medium: 1
+  mcp_only: 13
+  rest_only: 0

@@ -1,0 +1,15 @@
+generated: '2026-09-15'
+method: probed
+source: https://console.rubiconnect.com/.well-known/oauth-authorization-server
+note: >-
+  The REST OpenAPI declares only apiKey + http bearer security schemes (no oauth2 block), so no
+  scopes are derivable from the spec. OAuth 2.0 is used by the hosted MCP server and is described
+  only in the served authorization-server metadata, which advertises a single scope.
+authorization_endpoint: https://console.rubiconnect.com/en/authorize
+token_endpoint: https://console.rubiconnect.com/api/oauth/token
+scopes:
+  - name: mcp
+    description: >-
+      Grants an OAuth client access to the RubiConnect hosted MCP server and its 18 messaging /
+      campaign / analytics tools, scoped to the authenticated account.
+scope_count: 1

@@ -1,0 +1,19 @@
+generated: '2026-09-15'
+method: derived
+source: openapi/rubiconnect-openapi.json + live host probes
+versioning:
+  scheme: uri-path
+  current: v1
+  base: https://console.rubiconnect.com/api/v1
+  spec_version: 1.0.0
+deprecation:
+  policy_documented: false
+  deprecated_operations: []
+  note: No deprecation or Sunset/Deprecation (RFC 8594) policy is published.
+status_page:
+  found: false
+  note: >-
+    No external status page located. The MCP server exposes a get_server_status tool for
+    system health, but there is no public unauthenticated status/uptime page.
+sla:
+  documented: false

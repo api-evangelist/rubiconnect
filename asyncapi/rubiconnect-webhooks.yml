@@ -1,0 +1,36 @@
+generated: '2026-09-15'
+method: derived
+source: openapi/rubiconnect-openapi.json (POST /webhooks receiver + event schemas)
+note: >-
+  RubiConnect documents a webhook callback surface inside its REST OpenAPI: the client implements
+  a receiver endpoint (registered per-message via the callbackUrl field on sendMessage) and
+  RubiConnect POSTs event notifications to it. No standalone AsyncAPI document is published.
+transport: https-webhook
+delivery: >-
+  Per-message callbackUrl supplied on the /messages/send request; RubiConnect POSTs an
+  application/json body matching one of the event schemas below and expects a 200 response.
+events:
+  - name: message.status_updated
+    schema: MessageStatusUpdatedEvent
+    description: Delivery-state transition for a previously sent message.
+    envelope:
+      eventId: string
+      event: message.status_updated
+      timestamp: ISO 8601 date-time
+      data:
+        messageId: string
+        recipient: E.164 phone number
+        status: string
+  - name: message.received
+    schema: MessageReceivedEvent
+    description: An inbound message received from a customer handset.
+    envelope:
+      eventId: string
+      event: message.received
+      timestamp: ISO 8601 date-time
+      data:
+        messageId: string
+        sender: E.164 phone number
+        content: string
+        timestamp: ISO 8601 date-time
+event_count: 2

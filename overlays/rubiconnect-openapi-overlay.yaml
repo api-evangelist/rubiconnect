@@ -1,0 +1,41 @@
+overlay: 1.0.0
+info:
+  title: RubiConnect API Evangelist enrichment overlay
+  version: 1.0.0
+extends: ../openapi/rubiconnect-openapi.json
+x-provenance:
+  generated: '2026-09-15'
+  method: generated
+  source: >-
+    Enhancements derived from openapi/rubiconnect-openapi.json, the served OAuth discovery
+    documents, and the RubiConnect MCP repository. Does not mutate the original spec.
+actions:
+  - target: $.info
+    description: Record the discovered production contact and agent surfaces.
+    update:
+      contact:
+        name: RubiConnect Support
+        email: support@rubiconnect.com
+        url: https://console.rubiconnect.com
+      x-mcp-server: https://console.rubiconnect.com/api/mcp
+      x-oauth-authorization-server: https://console.rubiconnect.com/.well-known/oauth-authorization-server
+  - target: $.components.securitySchemes
+    description: Document the OAuth 2.0 + PKCE scheme used by the hosted MCP server (absent from the base spec).
+    update:
+      OAuth2PKCE:
+        type: oauth2
+        description: OAuth 2.0 authorization code + PKCE for the hosted MCP server (scope "mcp").
+        flows:
+          authorizationCode:
+            authorizationUrl: https://console.rubiconnect.com/en/authorize
+            tokenUrl: https://console.rubiconnect.com/api/oauth/token
+            scopes:
+              mcp: Access the RubiConnect hosted MCP server and its tools.
+  - target: $.paths['/messages/send'].post
+    description: Flag the non-reversible, non-idempotent nature of message dispatch for agent safety.
+    update:
+      x-idempotent: false
+      x-reversible: false
+      x-agent-warning: >-
+        Message dispatch is fire-and-forget with no idempotency key and no cancel/recall path;
+        a retried call may send duplicate messages.

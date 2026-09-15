@@ -1,0 +1,34 @@
+generated: '2026-09-15'
+method: searched
+source: >-
+  openapi/rubiconnect-openapi.json (REST schemes) +
+  https://console.rubiconnect.com/.well-known/oauth-authorization-server (MCP OAuth)
+summary:
+  types:
+  - apiKey
+  - http
+  - oauth2
+  api_key_in:
+  - header
+  api_key_prefix: rc_live_
+  oauth:
+    flow: authorization_code
+    pkce: [S256, plain]
+    dynamic_client_registration: true
+    authorization_endpoint: https://console.rubiconnect.com/en/authorize
+    token_endpoint: https://console.rubiconnect.com/api/oauth/token
+    registration_endpoint: https://console.rubiconnect.com/api/oauth/register
+    scopes: [mcp]
+    applies_to: hosted MCP server (not declared in the REST OpenAPI)
+schemes:
+- name: ApiKeyAuth
+  type: apiKey
+  in: header
+  parameter: X-API-Key
+  sources:
+  - openapi/rubiconnect-openapi.json
+- name: BearerAuth
+  type: http
+  scheme: bearer
+  sources:
+  - openapi/rubiconnect-openapi.json

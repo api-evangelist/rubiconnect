@@ -1,0 +1,11 @@
+generated: '2026-09-15'
+method: searched
+source: openapi/rubiconnect-openapi.json + https://console.rubiconnect.com (JS-rendered docs)
+limit_count: 0
+note: >-
+  No rate limits are documented. The OpenAPI declares no 429 response and no X-RateLimit-* /
+  RateLimit-* / Retry-After headers on any operation, and the developer docs on
+  console.rubiconnect.com are a JS-rendered SPA with no machine-readable limits surface. A 403
+  "feature disabled for this account tier" exists on sendMessage but is a tier gate, not a rate
+  limit. An honest zero.
+limits: []

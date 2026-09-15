@@ -1,0 +1,61 @@
+generated: '2026-09-15'
+method: derived
+source: openapi/rubiconnect-openapi.json (component schemas + id-reference fields)
+entities:
+  - name: Message
+    id_field: messageId
+    from: SendMessageResponse
+    fields: [messageId, broadcastId, status, channel, recipient, text, mediaUrl]
+  - name: Campaign
+    id_field: campaignId
+    from: CreateCampaignRequest / GetCampaignResponse
+    fields: [campaignId, name, status, recipientSource, contactsUrl, contactListName]
+  - name: Agent
+    id_field: agentId
+    note: RCS Agent or WhatsApp Business phone number; referenced but not defined as a standalone schema.
+  - name: Template
+    id_field: templateId
+    note: Pre-approved RCS/WhatsApp rich template; referenced but not defined as a standalone schema.
+  - name: Flow
+    id_field: flowId
+    note: Automation flow referenced by campaigns; referenced but not defined as a standalone schema.
+  - name: Capability
+    from: CapabilityCheckResponse
+    fields: [recipient, isRcs, status, features, optedOut]
+  - name: Event
+    from: MessageStatusUpdatedEvent / MessageReceivedEvent
+    fields: [eventId, event, timestamp, data]
+relationships:
+  - from: Message
+    to: Agent
+    type: belongs_to
+    via: agentId
+  - from: Message
+    to: Template
+    type: belongs_to
+    via: templateId
+  - from: Campaign
+    to: Agent
+    type: belongs_to
+    via: agentId
+  - from: Campaign
+    to: Template
+    type: belongs_to
+    via: templateId
+  - from: Campaign
+    to: Flow
+    type: belongs_to
+    via: flowId
+  - from: Capability
+    to: Agent
+    type: belongs_to
+    via: agentId
+  - from: Event
+    to: Message
+    type: belongs_to
+    via: data.messageId
+id_prefixes:
+  msg_: Message (sent)
+  rcm_: Message (received inbound)
+  evt_: Event
+  rc_live_: API key

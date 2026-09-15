@@ -38,9 +38,13 @@ apis:
       - AI Agents
     properties:
       - type: OpenAPI
-        url: https://console.rubiconnect.com/openapi.json
+        url: openapi/rubiconnect-openapi.json
       - type: Documentation
         url: https://console.rubiconnect.com
+      - type: Webhooks
+        url: asyncapi/rubiconnect-webhooks.yml
+      - type: Overlay
+        url: overlays/rubiconnect-openapi-overlay.yaml
   - name: RubiConnect MCP Server
     description: >-
       Hosted MCP server exposing 18 tools for messaging, templates, campaigns, agents, analytics, and media. Auth via
@@ -60,14 +64,63 @@ apis:
       - AI Agents
     properties:
       - type: MCPServer
-        url: https://console.rubiconnect.com/api/mcp
+        url: mcp/rubiconnect-mcp.yml
+      - type: ToolCrosswalk
+        url: mcp/rubiconnect-tool-crosswalk.yml
       - type: Documentation
         url: https://github.com/zarelan/rubiconnect-mcp
 maintainers:
   - FN: RubiConnect Support
-    url: mailto:support@rubiconnect.com
-generated:
+    email: support@rubiconnect.com
+    url: https://www.rubiconnect.com/en
+x-generated:
   by: apis.io/add
   model: claude-opus-4-8
   confidence: 95
   at: '2026-09-15T13:22:17.461Z'
+common:
+- type: Website
+  url: https://www.rubiconnect.com/en
+- type: DomainSecurity
+  url: security/rubiconnect-domain-security.yml
+- type: Authentication
+  url: authentication/rubiconnect-authentication.yml
+- type: WellKnown
+  url: well-known/rubiconnect-well-known.yml
+- type: LLMsTxt
+  url: llms/rubiconnect-llms.txt
+- type: Packages
+  url: packages/rubiconnect-packages.yml
+- type: OAuthScopes
+  url: scopes/rubiconnect-scopes.yml
+- type: Conformance
+  url: conformance/rubiconnect-conformance.yml
+- type: ErrorCatalog
+  url: errors/rubiconnect-problem-types.yml
+- type: DataModel
+  url: data-model/rubiconnect-data-model.yml
+- type: Conventions
+  url: conventions/rubiconnect-conventions.yml
+- type: Lifecycle
+  url: lifecycle/rubiconnect-lifecycle.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: Plans
+  url: plans/rubiconnect-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/rubiconnect-rate-limits.yml
+- type: SignUp
+  url: https://console.rubiconnect.com/en?view=signUp
+- type: TermsOfService
+  url: https://rubiconnect.com/en/terms
+- type: PrivacyPolicy
+  url: https://rubiconnect.com/en/privacy
+- type: Blog
+  url: https://rubiconnect.com/en/blog
+- type: GitHubOrganization
+  url: https://github.com/zarelan/rubiconnect-mcp
+x-enrichment:
+  date: '2026-09-15'
+  status: enriched
+  artifacts_added: 22
+  pass: local-v3

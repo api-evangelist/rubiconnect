@@ -1,0 +1,47 @@
+generated: '2026-09-15'
+method: probed
+source: live probes of /.well-known/* across every host in apis.yml + OpenAPI servers[]
+note: >-
+  console.rubiconnect.com serves real OAuth 2.0 authorization-server and OpenID-Connect
+  discovery documents (both 200 application/json, identical bodies) advertising PKCE,
+  dynamic client registration, and a single "mcp" scope for the hosted MCP server. No
+  security.txt, api-catalog, ai-plugin.json, oauth-protected-resource, or agent card is
+  served. The apex/www host (rubiconnect.com) returns the Next.js SPA shell (soft-404) for
+  every /.well-known/* path.
+hosts:
+  - host: console.rubiconnect.com
+    documents:
+      - path: /.well-known/oauth-authorization-server
+        status: 200
+        content_type: application/json
+        file: rubiconnect-oauth-authorization-server.json
+      - path: /.well-known/openid-configuration
+        status: 200
+        content_type: application/json
+        file: rubiconnect-openid-configuration.json
+      - path: /.well-known/oauth-protected-resource
+        status: 404
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+  - host: rubiconnect.com
+    documents:
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+        note: SPA shell (soft-404)
+      - path: /.well-known/openid-configuration
+        status: 404
+        note: SPA shell (soft-404)
+      - path: /.well-known/security.txt
+        status: 404
+        note: SPA shell (soft-404)
+      - path: /.well-known/agent-card.json
+        status: 404
+        note: SPA shell (soft-404)

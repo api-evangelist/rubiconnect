@@ -1,0 +1,95 @@
+generated: '2026-09-15'
+method: searched
+source: >-
+  https://github.com/zarelan/rubiconnect-mcp (README + package.json + smithery.yaml),
+  live probe of https://console.rubiconnect.com/api/mcp, and
+  https://console.rubiconnect.com/.well-known/oauth-authorization-server
+name: RubiConnect MCP Server
+description: >-
+  Official first-party MCP server for the RubiConnect RCS Business Messaging and WhatsApp
+  Business platform. Exposes 18 tools spanning capability checks, rich messaging, inbox,
+  templates, campaigns, agents, analytics, and media search.
+deployment:
+  mode: both
+  endpoint: https://console.rubiconnect.com/api/mcp
+  transport: sse
+  install: "npx -y rubiconnect-mcp"
+  package: https://github.com/zarelan/rubiconnect-mcp
+  auth: oauth
+  verified: probed
+  note: >-
+    Remote endpoint verified live (HTTP 401 "Unauthorized: Invalid or missing API Key" on an
+    anonymous tools/list POST, confirming the server exists and is auth-gated). It authenticates
+    via OAuth 2.0 + PKCE (dynamic client registration, scope "mcp", per the served
+    oauth-authorization-server metadata) or a Bearer API key (rc_live_...). The stdio option is a
+    thin bridge (bin/index.mjs) that proxies local stdio to the same remote SSE endpoint; the
+    npm package "rubiconnect-mcp" named in the install command is NOT published to the npm
+    registry (registry.npmjs.org/rubiconnect-mcp returns 404 as of 2026-09-15), so `npx -y
+    rubiconnect-mcp` and the Smithery install would currently fail until it is published — the
+    remote endpoint is the only working path today.
+auth:
+  scheme: oauth2-pkce | bearer-api-key
+  oauth_authorization_endpoint: https://console.rubiconnect.com/en/authorize
+  oauth_token_endpoint: https://console.rubiconnect.com/api/oauth/token
+  oauth_registration_endpoint: https://console.rubiconnect.com/api/oauth/register
+  scopes:
+    - mcp
+tools:
+  - name: check_capability
+    category: messaging
+    description: Check whether a phone number supports RCS (carrier capability lookup) or falls back to SMS.
+  - name: send_message
+    category: messaging
+    description: Send outbound plain text, media cards, or template messages via RCS or WhatsApp.
+  - name: get_inbox_messages
+    category: inbox
+    description: Fetch unread and incoming customer messages across your agents.
+  - name: get_conversation_history
+    category: inbox
+    description: Retrieve full two-way chat history with a specific customer phone number.
+  - name: list_templates
+    category: templates
+    description: List pre-approved RCS and WhatsApp rich message templates.
+  - name: get_template_detail
+    category: templates
+    description: Get complete structure of a template (rich card content, media, suggestion chips).
+  - name: create_template
+    category: templates
+    description: Draft a new interactive rich card, carousel, or text template with suggestion chips.
+  - name: submit_template_to_meta
+    category: templates
+    description: Submit a WhatsApp template to Meta for official review and carrier approval.
+  - name: list_campaigns
+    category: campaigns
+    description: List active, scheduled, and past broadcast campaigns.
+  - name: get_campaign_status
+    category: campaigns
+    description: Check live progress of a running campaign.
+  - name: get_campaign_performance
+    category: campaigns
+    description: Retrieve conversion, delivery, read rates, and CTR metrics for a campaign.
+  - name: create_campaign
+    category: campaigns
+    description: Launch an automated broadcast campaign to a contact list.
+  - name: list_agents
+    category: agents
+    description: List registered RCS Agents and WhatsApp Business phone numbers in your account.
+  - name: get_agent_profile
+    category: agents
+    description: Get carrier verification, logos, colors, and launch status for a specific messaging agent.
+  - name: get_message_stats
+    category: analytics
+    description: Retrieve 30-day message volume, delivery rates, and deduction statistics.
+  - name: get_server_status
+    category: analytics
+    description: System health, API status, and connection diagnostics.
+  - name: search_images
+    category: media
+    description: Search royalty-free image libraries for rich card headers.
+  - name: search_documentation
+    category: docs
+    description: Search official platform developer documentation directly within the LLM context.
+tool_count: 18
+schema_note: >-
+  Tool inputSchemas live only on the gated remote server; the stdio bridge defines none. Tool
+  names and descriptions are captured verbatim from the provider's published README.

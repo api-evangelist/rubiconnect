@@ -1,0 +1,43 @@
+generated: '2026-09-15'
+method: derived
+source: >-
+  openapi/rubiconnect-openapi.json,
+  https://console.rubiconnect.com/.well-known/oauth-authorization-server,
+  https://console.rubiconnect.com/.well-known/openid-configuration
+standards:
+  - id: oauth2
+    conforms: true
+    evidence: >-
+      Served oauth-authorization-server metadata with authorization_endpoint, token_endpoint,
+      response_types_supported [code], grant_types_supported [authorization_code].
+  - id: oauth2-pkce
+    conforms: true
+    evidence: code_challenge_methods_supported ["S256","plain"] in the authorization-server metadata.
+  - id: oidc-discovery
+    conforms: true
+    evidence: /.well-known/openid-configuration returns 200 with a valid issuer + endpoint set.
+  - id: rfc7591-dynamic-client-registration
+    conforms: true
+    evidence: registration_endpoint https://console.rubiconnect.com/api/oauth/register advertised.
+  - id: rfc8414-oauth-server-metadata
+    conforms: true
+    evidence: /.well-known/oauth-authorization-server returns RFC 8414-shaped metadata.
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: >-
+      Error responses use a custom { success:false, error:string } envelope
+      (application/json), not application/problem+json.
+  - id: e164
+    conforms: true
+    evidence: >-
+      recipient/sender fields across message and event schemas are documented as E.164
+      handset phone numbers.
+  - id: idempotency
+    conforms: false
+    evidence: No Idempotency-Key header or idempotent-retry mechanism documented in the contract.
+domain_standards:
+  note: >-
+    RubiConnect is an RCS Business Messaging and WhatsApp Business (Meta Cloud API) reseller/CPaaS.
+    RCS and the WhatsApp Business Platform are the market channel standards it rides, but the
+    published REST contract does not itself declare a formal domain-standard signature (no CAMARA
+    messaging profile, no MEF/TMF API shape) in a machine-readable form, so none is asserted here.

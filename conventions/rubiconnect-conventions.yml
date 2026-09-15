@@ -1,0 +1,41 @@
+generated: '2026-09-15'
+method: derived
+source: openapi/rubiconnect-openapi.json + served OAuth metadata
+auth:
+  styles:
+    - apiKey header X-API-Key (rc_live_...)
+    - http bearer token
+    - oauth2 authorization_code + PKCE (hosted MCP server, scope "mcp")
+idempotency:
+  coverage: none
+  mechanism: none
+  note: >-
+    No Idempotency-Key header or replay-protection mechanism is documented on any mutating
+    operation (sendMessage, createCampaign, submit_template_to_meta). An agent cannot safely
+    retry a write without risk of duplicate sends.
+pagination:
+  style: none-documented
+  note: The published operations expose no list-with-cursor/offset pagination parameters.
+versioning:
+  style: uri-path
+  current: v1
+error_envelope:
+  media_type: application/json
+  shape: '{ success: false, error: string }'
+  rfc9457: false
+request_id:
+  documented: false
+rate_limit_signaling:
+  documented: false
+  note: No X-RateLimit-* / RateLimit-* / Retry-After headers are documented.
+reversibility:
+  status: na
+  note: >-
+    The write surface is send-and-dispatch (sendMessage queues transmission, createCampaign
+    queues a broadcast, submit_template_to_meta submits for review). No cancel/void/recall/undo
+    operation is published for any of these, and messaging dispatch is inherently non-reversible
+    once queued. Marked na rather than penalized: the docs state no reversal path exists and none
+    is expected for fire-and-forget message dispatch. No window is asserted because none is documented.
+dry_run_mode:
+  status: na
+  note: No dry-run/preview/validate-only mode documented for the mutating operations.

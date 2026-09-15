@@ -1,0 +1,26 @@
+generated: '2026-09-15'
+method: searched
+source: >-
+  https://github.com/zarelan/rubiconnect-mcp (package.json), registry.npmjs.org probe,
+  RubiConnect + MCP repo docs
+note: >-
+  No first-party REST client SDK (JS/Python/etc.) was found on npm, PyPI, Maven, NuGet, RubyGems,
+  Packagist, or crates.io. The only first-party published package is the MCP bridge below.
+packages:
+  - name: rubiconnect-mcp
+    kind: mcp-bridge-cli
+    official: true
+    registry: npm
+    version: null
+    published: null
+    repo: https://github.com/zarelan/rubiconnect-mcp
+    author: RubiConnect
+    license: MIT
+    install: "npx -y rubiconnect-mcp"
+    note: >-
+      package.json declares version 1.0.0, but the package is NOT published to the npm registry
+      (registry.npmjs.org/rubiconnect-mcp returned HTTP 404 on 2026-09-15), so version/published
+      are null. The documented `npx -y rubiconnect-mcp` and Smithery install would currently fail;
+      the GitHub source is real (last pushed 2026-09-15) and can be run directly. It is a thin
+      stdio->SSE bridge to the hosted MCP endpoint rather than a REST client library.
+package_count: 1

@@ -1,0 +1,10 @@
+generated: '2026-09-15'
+method: probed
+source: https://rubiconnect.com/en/pricing
+plan_count: 0
+note: >-
+  A pricing route exists (https://rubiconnect.com/en/pricing, HTTP 200) but it is a JS-rendered
+  Next.js SPA and serves no machine-readable pricing content; no tiers, prices, quotas, or overage
+  rates are present in the delivered HTML. Free-account signup is available at
+  https://console.rubiconnect.com/en?view=signUp. No published plan data could be captured.
+plans: []

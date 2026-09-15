@@ -1,0 +1,14 @@
+generated: '2026-09-15'
+method: generated
+source: openapi/rubiconnect-openapi.json
+api: RubiConnect Messaging Platform
+skills:
+  - name: send-rcs-or-whatsapp-message
+    file: rubiconnect-send-message.md
+    operations: [checkCapability, sendMessage]
+    description: Check RCS capability then send a rich message with SMS fallback.
+  - name: launch-broadcast-campaign
+    file: rubiconnect-run-campaign.md
+    operations: [createCampaign, getCampaign]
+    description: Launch a broadcast campaign to a contact list and track it.
+skill_count: 2

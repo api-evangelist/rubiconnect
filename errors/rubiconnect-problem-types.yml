@@ -1,0 +1,32 @@
+generated: '2026-09-15'
+method: derived
+source: openapi/rubiconnect-openapi.json (4xx responses across all operations)
+format: custom
+envelope:
+  media_type: application/json
+  schema: ErrorResponse
+  shape:
+    success: false
+    error: "human-readable error message string"
+  note: >-
+    Errors are a flat custom envelope ({ success: false, error: "..." }), NOT RFC 9457
+    application/problem+json. No error code taxonomy, type URI, or machine-readable
+    remediation field is published in the contract.
+problem_types:
+  - status: 400
+    title: Bad request
+    detail: Invalid parameter validation.
+    operations: [sendMessage, createCampaign, checkCapability]
+  - status: 401
+    title: Unauthorized
+    detail: Missing or invalid API key / Bearer token.
+    operations: [sendMessage, createCampaign, getCampaign, checkCapability]
+  - status: 403
+    title: Forbidden
+    detail: Feature disabled for this account tier.
+    operations: [sendMessage]
+  - status: 404
+    title: Not found
+    detail: Agent, template, or campaign not found.
+    operations: [sendMessage, getCampaign, checkCapability]
+count: 4
