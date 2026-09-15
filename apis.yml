@@ -1,0 +1,73 @@
+name: RubiConnect
+description: >-
+  Enterprise business-messaging (CPaaS) platform for RCS Business Messaging and WhatsApp Business, exposing a REST API
+  with a public OpenAPI contract and a hosted MCP server with 18 tools for messaging, campaigns, templates, and
+  analytics.
+url: https://raw.githubusercontent.com/api-evangelist/rubiconnect/refs/heads/main/apis.yml
+created: '2026-09-15'
+modified: '2026-09-15'
+specificationVersion: '0.21'
+tags:
+  - CPaaS
+  - Communications APIs
+  - Business Messaging
+  - RCS
+  - WhatsApp Business
+  - SMS
+  - Marketing & Campaigns
+  - Conversational AI
+  - MCP
+  - AI Agents
+apis:
+  - name: RubiConnect Messaging Platform
+    description: >-
+      REST API for sending messages, managing campaigns, RCS capability checks, and webhook callbacks. Auth via API key
+      (X-API-Key) or Bearer token.
+    humanURL: https://console.rubiconnect.com
+    baseURL: https://console.rubiconnect.com/api/v1
+    tags:
+      - CPaaS
+      - Communications APIs
+      - Business Messaging
+      - RCS
+      - WhatsApp Business
+      - SMS
+      - Marketing & Campaigns
+      - Conversational AI
+      - MCP
+      - AI Agents
+    properties:
+      - type: OpenAPI
+        url: https://console.rubiconnect.com/openapi.json
+      - type: Documentation
+        url: https://console.rubiconnect.com
+  - name: RubiConnect MCP Server
+    description: >-
+      Hosted MCP server exposing 18 tools for messaging, templates, campaigns, agents, analytics, and media. Auth via
+      OAuth 2.0/PKCE or API key.
+    humanURL: https://console.rubiconnect.com
+    baseURL: https://console.rubiconnect.com/api/mcp
+    tags:
+      - CPaaS
+      - Communications APIs
+      - Business Messaging
+      - RCS
+      - WhatsApp Business
+      - SMS
+      - Marketing & Campaigns
+      - Conversational AI
+      - MCP
+      - AI Agents
+    properties:
+      - type: MCPServer
+        url: https://console.rubiconnect.com/api/mcp
+      - type: Documentation
+        url: https://github.com/zarelan/rubiconnect-mcp
+maintainers:
+  - FN: RubiConnect Support
+    url: mailto:support@rubiconnect.com
+generated:
+  by: apis.io/add
+  model: claude-opus-4-8
+  confidence: 95
+  at: '2026-09-15T13:22:17.461Z'
