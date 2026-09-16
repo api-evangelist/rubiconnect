@@ -19,56 +19,86 @@ tags:
   - MCP
   - AI Agents
 apis:
-  - name: RubiConnect Messaging Platform
-    description: >-
-      REST API for sending messages, managing campaigns, RCS capability checks, and webhook callbacks. Auth via API key
-      (X-API-Key) or Bearer token.
-    humanURL: https://console.rubiconnect.com
-    baseURL: https://console.rubiconnect.com/api/v1
-    tags:
-      - CPaaS
-      - Communications APIs
-      - Business Messaging
-      - RCS
-      - WhatsApp Business
-      - SMS
-      - Marketing & Campaigns
-      - Conversational AI
-      - MCP
-      - AI Agents
-    properties:
-      - type: OpenAPI
-        url: openapi/rubiconnect-openapi.json
-      - type: Documentation
-        url: https://console.rubiconnect.com
-      - type: Webhooks
-        url: asyncapi/rubiconnect-webhooks.yml
-      - type: Overlay
-        url: overlays/rubiconnect-openapi-overlay.yaml
-  - name: RubiConnect MCP Server
-    description: >-
-      Hosted MCP server exposing 18 tools for messaging, templates, campaigns, agents, analytics, and media. Auth via
-      OAuth 2.0/PKCE or API key.
-    humanURL: https://console.rubiconnect.com
-    baseURL: https://console.rubiconnect.com/api/mcp
-    tags:
-      - CPaaS
-      - Communications APIs
-      - Business Messaging
-      - RCS
-      - WhatsApp Business
-      - SMS
-      - Marketing & Campaigns
-      - Conversational AI
-      - MCP
-      - AI Agents
-    properties:
-      - type: MCPServer
-        url: mcp/rubiconnect-mcp.yml
-      - type: ToolCrosswalk
-        url: mcp/rubiconnect-tool-crosswalk.yml
-      - type: Documentation
-        url: https://github.com/zarelan/rubiconnect-mcp
+- name: RubiConnect MCP Server
+  description: >-
+    Hosted MCP server exposing 18 tools for messaging, templates, campaigns, agents, analytics, and media.
+    Auth via OAuth 2.0/PKCE or API key.
+  humanURL: https://console.rubiconnect.com
+  baseURL: https://console.rubiconnect.com/api/mcp
+  tags:
+  - CPaaS
+  - Communications APIs
+  - Business Messaging
+  - RCS
+  - WhatsApp Business
+  - SMS
+  - Marketing & Campaigns
+  - Conversational AI
+  - MCP
+  - AI Agents
+  properties:
+  - type: MCPServer
+    url: mcp/rubiconnect-mcp.yml
+  - type: ToolCrosswalk
+    url: mcp/rubiconnect-tool-crosswalk.yml
+  - type: Documentation
+    url: https://github.com/zarelan/rubiconnect-mcp
+- aid: rubiconnect:rubiconnect-campaigns-api
+  name: RubiConnect Campaigns API
+  description: The Campaigns API from RubiConnect — 1 operation(s) for campaigns.
+  humanURL: https://console.rubiconnect.com
+  baseURL: https://console.rubiconnect.com/api/v1
+  tags:
+  - Campaigns
+  properties:
+  - type: OpenAPI
+    url: openapi/rubiconnect-campaigns-api-openapi.yml
+  - type: Documentation
+    url: https://console.rubiconnect.com
+  - type: Webhooks
+    url: asyncapi/rubiconnect-webhooks.yml
+- aid: rubiconnect:rubiconnect-capabilities-api
+  name: RubiConnect Capabilities API
+  description: The Capabilities API from RubiConnect — 1 operation(s) for capabilities.
+  humanURL: https://console.rubiconnect.com
+  baseURL: https://console.rubiconnect.com/api/v1
+  tags:
+  - Capabilities
+  properties:
+  - type: OpenAPI
+    url: openapi/rubiconnect-capabilities-api-openapi.yml
+  - type: Documentation
+    url: https://console.rubiconnect.com
+  - type: Webhooks
+    url: asyncapi/rubiconnect-webhooks.yml
+- aid: rubiconnect:rubiconnect-messages-api
+  name: RubiConnect Messages API
+  description: The Messages API from RubiConnect — 1 operation(s) for messages.
+  humanURL: https://console.rubiconnect.com
+  baseURL: https://console.rubiconnect.com/api/v1
+  tags:
+  - Messages
+  properties:
+  - type: OpenAPI
+    url: openapi/rubiconnect-messages-api-openapi.yml
+  - type: Documentation
+    url: https://console.rubiconnect.com
+  - type: Webhooks
+    url: asyncapi/rubiconnect-webhooks.yml
+- aid: rubiconnect:rubiconnect-webhooks-api
+  name: RubiConnect Webhooks API
+  description: The Webhooks API from RubiConnect — 1 operation(s) for webhooks.
+  humanURL: https://console.rubiconnect.com
+  baseURL: https://console.rubiconnect.com/api/v1
+  tags:
+  - Webhooks
+  properties:
+  - type: OpenAPI
+    url: openapi/rubiconnect-webhooks-api-openapi.yml
+  - type: Documentation
+    url: https://console.rubiconnect.com
+  - type: Webhooks
+    url: asyncapi/rubiconnect-webhooks.yml
 maintainers:
   - FN: RubiConnect Support
     email: support@rubiconnect.com
@@ -79,6 +109,8 @@ x-generated:
   confidence: 95
   at: '2026-09-15T13:22:17.461Z'
 common:
+- type: Overlay
+  url: overlays/rubiconnect-openapi-overlay.yaml
 - type: Website
   url: https://www.rubiconnect.com/en
 - type: DomainSecurity
