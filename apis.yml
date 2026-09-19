@@ -77,6 +77,8 @@ apis:
   humanURL: https://console.rubiconnect.com
   baseURL: https://console.rubiconnect.com/api/v1
   tags:
+  - Message
+  tags_raw:
   - Messages
   properties:
   - type: OpenAPI
@@ -91,6 +93,8 @@ apis:
   humanURL: https://console.rubiconnect.com
   baseURL: https://console.rubiconnect.com/api/v1
   tags:
+  - Webhook
+  tags_raw:
   - Webhooks
   properties:
   - type: OpenAPI
