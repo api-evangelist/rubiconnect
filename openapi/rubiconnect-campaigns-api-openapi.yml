@@ -1,0 +1,199 @@
+openapi: 3.2.0
+info:
+  title: RubiConnect Messaging Platform & MCP Server Campaigns API
+  description: Model Context Protocol (MCP) server and programmatic interface for RubiConnect. Enables external AI agents and developers to check RCS & WhatsApp capability, dispatch rich interactive messages, manage campaigns & templates, access inbox conversations, and query real-time delivery analytics.
+  version: 1.0.0
+servers:
+- url: https://console.rubiconnect.com/api/v1
+  description: Production Server
+tags:
+- name: Campaigns
+paths:
+  /campaigns:
+    post:
+      summary: Create and dispatch a campaign
+      description: Creates a new campaign and dispatches messages to stored contact lists or pre-signed remote CSV/JSONL URLs.
+      operationId: createCampaign
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCampaignRequest'
+      responses:
+        '201':
+          description: Campaign created and queued for broadcast
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateCampaignResponse'
+        '400':
+          description: Invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      - BearerAuth: []
+      tags:
+      - Campaigns
+    get:
+      summary: Query campaign status and stats
+      description: Fetches a single campaign by ID or lists recent campaigns with real-time delivery and read counters.
+      operationId: getCampaign
+      parameters:
+      - name: id
+        in: query
+        description: Specific campaign ID to query
+        required: false
+        schema:
+          type: string
+      - name: agentId
+        in: query
+        description: Filter campaigns by agent ID
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Campaign details retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCampaignResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Campaign not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      - BearerAuth: []
+      tags:
+      - Campaigns
+components:
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: false
+        error:
+          type: string
+          example: 'Invalid or missing parameter: recipient is required.'
+    CreateCampaignResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        campaignId:
+          type: string
+          example: camp_1725001234567_4321
+        status:
+          type: string
+          example: Sending
+        recipientSource:
+          type: string
+          example: remote_url
+        contactsUrl:
+          type: string
+          example: https://storage.googleapis.com/crm-exports/customers.csv
+    GetCampaignResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        campaign:
+          type: object
+          properties:
+            id:
+              type: string
+            name:
+              type: string
+            status:
+              type: string
+            stats:
+              type: object
+              properties:
+                sent:
+                  type: integer
+                delivered:
+                  type: integer
+                read:
+                  type: integer
+                failed:
+                  type: integer
+    CreateCampaignRequest:
+      type: object
+      required:
+      - name
+      - agentId
+      properties:
+        name:
+          type: string
+          description: Campaign display name.
+          example: Summer VIP Alert
+        agentId:
+          type: string
+          description: Registered agent ID.
+          example: marketing-agent
+        templateId:
+          type: string
+          description: Pre-configured template ID to broadcast.
+          example: summer_vip_sale
+        flowId:
+          type: string
+          description: Interactive flow ID to trigger for recipients.
+          example: flow_123
+        recipientSource:
+          type: string
+          enum:
+          - contacts
+          - remote_url
+          default: contacts
+          description: Audience source for the campaign.
+        contactsUrl:
+          type: string
+          description: Pre-signed HTTPS CSV/JSONL URL (required when recipientSource is remote_url).
+          example: https://storage.googleapis.com/crm-exports/customers.csv
+        urlFormat:
+          type: string
+          enum:
+          - csv
+          - jsonl
+          default: csv
+        contactListName:
+          type: string
+          description: Contact list name (required when recipientSource is contacts).
+        sendNow:
+          type: boolean
+          default: true
+          description: Immediately trigger and stream the broadcast.
+        allowSmsFallback:
+          type: boolean
+          default: false
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+    BearerAuth:
+      type: http
+      scheme: bearer

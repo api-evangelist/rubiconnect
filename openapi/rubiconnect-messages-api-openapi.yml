@@ -1,0 +1,155 @@
+openapi: 3.2.0
+info:
+  title: RubiConnect Messaging Platform & MCP Server Messages API
+  description: Model Context Protocol (MCP) server and programmatic interface for RubiConnect. Enables external AI agents and developers to check RCS & WhatsApp capability, dispatch rich interactive messages, manage campaigns & templates, access inbox conversations, and query real-time delivery analytics.
+  version: 1.0.0
+servers:
+- url: https://console.rubiconnect.com/api/v1
+  description: Production Server
+tags:
+- name: Messages
+paths:
+  /messages/send:
+    post:
+      summary: Send a single message or stream broadcast
+      description: Sends a plain text, media card, or rich template message to a recipient phone number, OR streams a zero-persistence bulk broadcast directly from a remote CSV/JSONL HTTPS URL.
+      operationId: sendMessage
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SendMessageRequest'
+      responses:
+        '202':
+          description: Accepted and queued for transmission or streaming
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SendMessageResponse'
+        '400':
+          description: Bad request (invalid parameter validation)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized (missing or invalid API key)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Forbidden (feature disabled for this account tier)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Agent or template not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      - BearerAuth: []
+      tags:
+      - Messages
+components:
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: false
+        error:
+          type: string
+          example: 'Invalid or missing parameter: recipient is required.'
+    SendMessageResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        messageId:
+          type: string
+          description: Unique message tracking identifier (for single send).
+          example: msg_9a8b7c6d5e4f3g2h1i
+        broadcastId:
+          type: string
+          description: Unique broadcast campaign identifier (for remote URL streaming).
+          example: bcast_1725001234567_8901
+        status:
+          type: string
+          enum:
+          - sending
+          - sent
+          - streaming
+          example: streaming
+        channel:
+          type: string
+          example: RCS
+    SendMessageRequest:
+      type: object
+      required:
+      - agentId
+      properties:
+        recipient:
+          type: string
+          description: Destination phone number in E.164 format. Required for single send if contactsUrl is not specified.
+          example: '+15555551234'
+        contactsUrl:
+          type: string
+          description: Pre-signed HTTPS CSV or JSONL URL to stream contacts from with zero database persistence.
+          example: https://storage.googleapis.com/crm-exports/customers.csv
+        urlFormat:
+          type: string
+          enum:
+          - csv
+          - jsonl
+          description: Format of contactsUrl file.
+          default: csv
+          example: csv
+        agentId:
+          type: string
+          description: The registered agent identifier.
+          example: marketing-agent
+        text:
+          type: string
+          description: Plain text message content. Mutually exclusive with mediaUrl and templateId.
+          example: Hello, thank you for your order!
+        mediaUrl:
+          type: string
+          description: Public URL pointing to a media attachment. Mutually exclusive with text and templateId.
+          example: https://example.com/banner.jpg
+        templateId:
+          type: string
+          description: The pre-configured rich template ID. Mutually exclusive with text and mediaUrl.
+          example: order_delivery_alert
+        contentVariables:
+          type: object
+          description: Key-value pair map to interpolate variables inside messages or templates.
+          additionalProperties:
+            type: string
+          example:
+            customerName: Alice
+            orderNumber: RC-123
+        allowSmsFallback:
+          type: boolean
+          description: Whether to fallback to SMS if recipient handset lacks RCS capability.
+          default: false
+          example: true
+        callbackUrl:
+          type: string
+          description: Custom webhook URL to receive status callbacks specifically for this message.
+          example: https://callback.mycompany.com/webhook
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+    BearerAuth:
+      type: http
+      scheme: bearer

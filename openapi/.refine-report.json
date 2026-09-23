@@ -1,0 +1,35 @@
+{
+  "provider": "rubiconnect",
+  "sources": [
+    "_original/rubiconnect-openapi.json"
+  ],
+  "outputs": [
+    "rubiconnect-campaigns-api-openapi.yml",
+    "rubiconnect-capabilities-api-openapi.yml",
+    "rubiconnect-messages-api-openapi.yml",
+    "rubiconnect-webhooks-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "rubiconnect-openapi.json: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "rubiconnect-openapi.json: tagged paths POST /messages/send -> Messages",
+    "rubiconnect-openapi.json: tagged paths POST /campaigns -> Campaigns",
+    "rubiconnect-openapi.json: tagged paths GET /campaigns -> Campaigns",
+    "rubiconnect-openapi.json: tagged paths POST /capabilities/check -> Capabilities",
+    "rubiconnect-openapi.json: tagged paths POST /webhooks -> Webhooks",
+    "rubiconnect-openapi.json: declared missing tag: Campaigns",
+    "rubiconnect-openapi.json: declared missing tag: Capabilities",
+    "rubiconnect-openapi.json: declared missing tag: Messages",
+    "rubiconnect-openapi.json: declared missing tag: Webhooks",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "rubiconnect-campaigns-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "rubiconnect-capabilities-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "rubiconnect-messages-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "rubiconnect-webhooks-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
+}

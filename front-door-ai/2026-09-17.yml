@@ -1,0 +1,31 @@
+# Front Door AI Index — rubiconnect — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: rubiconnect
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: www.rubiconnect.com
+  final_host: rubiconnect.com
+  ownership: own
+  owner: rubiconnect
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 15
+  host_score: 15
+  density: 20.72
+  words: 724
+  tiers:
+    agentic: 6
+    core: 9
+    model: 0
+  ambiguous: 8
+  top_terms:
+    AI: 8
+    agent: 7
+    AI assistant: 3
+    MCP: 2
+    AI agent: 1
+    automation: 1
+    generative ai: 1

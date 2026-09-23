@@ -1,0 +1,115 @@
+openapi: 3.2.0
+info:
+  title: RubiConnect Messaging Platform & MCP Server Capabilities API
+  description: Model Context Protocol (MCP) server and programmatic interface for RubiConnect. Enables external AI agents and developers to check RCS & WhatsApp capability, dispatch rich interactive messages, manage campaigns & templates, access inbox conversations, and query real-time delivery analytics.
+  version: 1.0.0
+servers:
+- url: https://console.rubiconnect.com/api/v1
+  description: Production Server
+tags:
+- name: Capabilities
+paths:
+  /capabilities/check:
+    post:
+      summary: Check RCS capability
+      description: Verifies whether a recipient phone number is capable of receiving rich RCS messages for a specific agent context.
+      operationId: checkCapability
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CapabilityCheckRequest'
+      responses:
+        '200':
+          description: Capability check successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CapabilityCheckResponse'
+        '400':
+          description: Bad request (invalid parameter validation)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized (missing or invalid API key)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Agent not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      - BearerAuth: []
+      tags:
+      - Capabilities
+components:
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: false
+        error:
+          type: string
+          example: 'Invalid or missing parameter: recipient is required.'
+    CapabilityCheckRequest:
+      type: object
+      required:
+      - recipient
+      - agentId
+      properties:
+        recipient:
+          type: string
+          description: Destination phone number in E.164 format.
+          example: '+15555551234'
+        agentId:
+          type: string
+          description: The registered agent identifier.
+          example: marketing-agent
+    CapabilityCheckResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        recipient:
+          type: string
+          description: Normalized E.164 phone number.
+          example: '+15555551234'
+        isRcs:
+          type: boolean
+          description: Whether the recipient is RCS-capable.
+          example: true
+        status:
+          type: string
+          description: Detailed RCS capability status.
+          example: CAPABILITY_FULL
+        features:
+          type: array
+          items:
+            type: string
+          description: Supported features/capabilities of the handset.
+          example:
+          - UP_2_0
+          - GEO_PUSH
+        optedOut:
+          type: boolean
+          description: Whether the recipient has opted out of communication.
+          example: false
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+    BearerAuth:
+      type: http
+      scheme: bearer

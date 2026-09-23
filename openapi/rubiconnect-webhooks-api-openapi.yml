@@ -1,0 +1,185 @@
+openapi: 3.2.0
+info:
+  title: RubiConnect Messaging Platform & MCP Server Webhooks API
+  description: Model Context Protocol (MCP) server and programmatic interface for RubiConnect. Enables external AI agents and developers to check RCS & WhatsApp capability, dispatch rich interactive messages, manage campaigns & templates, access inbox conversations, and query real-time delivery analytics.
+  version: 1.0.0
+servers:
+- url: https://console.rubiconnect.com/api/v1
+  description: Production Server
+tags:
+- name: Webhooks
+paths:
+  /webhooks:
+    post:
+      summary: Webhook event callback receiver
+      description: Endpoint implemented by the client to receive live notifications (message.status_updated and message.received) from RubiConnect.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              oneOf:
+              - $ref: '#/components/schemas/MessageStatusUpdatedEvent'
+              - $ref: '#/components/schemas/MessageReceivedEvent'
+      responses:
+        '200':
+          description: Webhook event successfully processed
+      tags:
+      - Webhooks
+      operationId: postWebhooks
+      x-operation-id-source: derived
+components:
+  schemas:
+    MessageReceivedEvent:
+      type: object
+      required:
+      - eventId
+      - event
+      - timestamp
+      - data
+      properties:
+        eventId:
+          type: string
+          description: Unique event identifier.
+          example: evt_0f9g8h7i6j5k4l3m2n1o
+        event:
+          type: string
+          enum:
+          - message.received
+          example: message.received
+        timestamp:
+          type: string
+          format: date-time
+          description: The ISO 8601 timestamp when the event was generated.
+          example: '2026-06-11T07:26:00Z'
+        data:
+          type: object
+          required:
+          - messageId
+          - sender
+          - content
+          - timestamp
+          properties:
+            messageId:
+              type: string
+              description: Unique received message identifier.
+              example: rcm_0a1b2c3d4e5f6g7h8i9j
+            sender:
+              type: string
+              description: Sender handset phone number in E.164 format.
+              example: '+15555551234'
+            content:
+              type:
+              - string
+              - 'null'
+              description: Text content of the message.
+              example: Hello World
+            timestamp:
+              type: string
+              format: date-time
+              description: The ISO 8601 timestamp when the message was received by the system.
+              example: '2026-06-11T07:26:00Z'
+            suggestionResponse:
+              type:
+              - object
+              - 'null'
+              properties:
+                text:
+                  type: string
+                  description: Button label text.
+                postbackData:
+                  type: string
+                  description: Postback data payload associated with the button action.
+              example: null
+            mediaUrl:
+              type:
+              - string
+              - 'null'
+              description: URL of the media attachment shared by the contact.
+              example: null
+            location:
+              type:
+              - object
+              - 'null'
+              properties:
+                latitude:
+                  type: number
+                  example: 48.8584
+                longitude:
+                  type: number
+                  example: 2.2945
+                label:
+                  type:
+                  - string
+                  - 'null'
+                  example: Eiffel Tower
+              example: null
+    MessageStatusUpdatedEvent:
+      type: object
+      required:
+      - eventId
+      - event
+      - timestamp
+      - data
+      properties:
+        eventId:
+          type: string
+          description: Unique event identifier.
+          example: evt_0a1b2c3d4e5f6g7h8i9j
+        event:
+          type: string
+          enum:
+          - message.status_updated
+          example: message.status_updated
+        timestamp:
+          type: string
+          format: date-time
+          description: The ISO 8601 timestamp when the event was generated.
+          example: '2026-06-10T14:21:04Z'
+        data:
+          type: object
+          required:
+          - messageId
+          - recipient
+          - status
+          properties:
+            messageId:
+              type: string
+              description: Unique message tracking identifier.
+              example: msg_9a8b7c6d5e4f3g2h1i
+            recipient:
+              type: string
+              description: Handset phone number in E.164 format.
+              example: '+15555551234'
+            status:
+              type: string
+              enum:
+              - Delivered
+              - Read
+              - Failed
+              example: Delivered
+            deliveredAt:
+              type:
+              - string
+              - 'null'
+              format: date-time
+              example: '2026-06-10T14:21:03Z'
+            readAt:
+              type:
+              - string
+              - 'null'
+              format: date-time
+              example: null
+            error:
+              type:
+              - string
+              - 'null'
+              example: null
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+    BearerAuth:
+      type: http
+      scheme: bearer
