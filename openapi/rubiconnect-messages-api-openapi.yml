@@ -67,30 +67,6 @@ components:
         error:
           type: string
           example: 'Invalid or missing parameter: recipient is required.'
-    SendMessageResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-          example: true
-        messageId:
-          type: string
-          description: Unique message tracking identifier (for single send).
-          example: msg_9a8b7c6d5e4f3g2h1i
-        broadcastId:
-          type: string
-          description: Unique broadcast campaign identifier (for remote URL streaming).
-          example: bcast_1725001234567_8901
-        status:
-          type: string
-          enum:
-          - sending
-          - sent
-          - streaming
-          example: streaming
-        channel:
-          type: string
-          example: RCS
     SendMessageRequest:
       type: object
       required:
@@ -145,6 +121,30 @@ components:
           type: string
           description: Custom webhook URL to receive status callbacks specifically for this message.
           example: https://callback.mycompany.com/webhook
+    SendMessageResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        messageId:
+          type: string
+          description: Unique message tracking identifier (for single send).
+          example: msg_9a8b7c6d5e4f3g2h1i
+        broadcastId:
+          type: string
+          description: Unique broadcast campaign identifier (for remote URL streaming).
+          example: bcast_1725001234567_8901
+        status:
+          type: string
+          enum:
+          - sending
+          - sent
+          - streaming
+          example: streaming
+        channel:
+          type: string
+          example: RCS
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
