@@ -52,15 +52,6 @@ paths:
       - Capabilities
 components:
   schemas:
-    ErrorResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-          example: false
-        error:
-          type: string
-          example: 'Invalid or missing parameter: recipient is required.'
     CapabilityCheckRequest:
       type: object
       required:
@@ -105,6 +96,15 @@ components:
           type: boolean
           description: Whether the recipient has opted out of communication.
           example: false
+    ErrorResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: false
+        error:
+          type: string
+          example: 'Invalid or missing parameter: recipient is required.'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

@@ -58,15 +58,6 @@ paths:
       - Messages
 components:
   schemas:
-    ErrorResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-          example: false
-        error:
-          type: string
-          example: 'Invalid or missing parameter: recipient is required.'
     SendMessageRequest:
       type: object
       required:
@@ -121,6 +112,15 @@ components:
           type: string
           description: Custom webhook URL to receive status callbacks specifically for this message.
           example: https://callback.mycompany.com/webhook
+    ErrorResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: false
+        error:
+          type: string
+          example: 'Invalid or missing parameter: recipient is required.'
     SendMessageResponse:
       type: object
       properties:
