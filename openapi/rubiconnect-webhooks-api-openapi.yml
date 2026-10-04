@@ -30,6 +30,67 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    MessageStatusUpdatedEvent:
+      type: object
+      required:
+      - eventId
+      - event
+      - timestamp
+      - data
+      properties:
+        eventId:
+          type: string
+          description: Unique event identifier.
+          example: evt_0a1b2c3d4e5f6g7h8i9j
+        event:
+          type: string
+          enum:
+          - message.status_updated
+          example: message.status_updated
+        timestamp:
+          type: string
+          format: date-time
+          description: The ISO 8601 timestamp when the event was generated.
+          example: '2026-06-10T14:21:04Z'
+        data:
+          type: object
+          required:
+          - messageId
+          - recipient
+          - status
+          properties:
+            messageId:
+              type: string
+              description: Unique message tracking identifier.
+              example: msg_9a8b7c6d5e4f3g2h1i
+            recipient:
+              type: string
+              description: Handset phone number in E.164 format.
+              example: '+15555551234'
+            status:
+              type: string
+              enum:
+              - Delivered
+              - Read
+              - Failed
+              example: Delivered
+            deliveredAt:
+              type:
+              - string
+              - 'null'
+              format: date-time
+              example: '2026-06-10T14:21:03Z'
+            readAt:
+              type:
+              - string
+              - 'null'
+              format: date-time
+              example: null
+            error:
+              type:
+              - string
+              - 'null'
+              example: null
     MessageReceivedEvent:
       type: object
       required:
@@ -113,67 +174,6 @@ components:
                   - string
                   - 'null'
                   example: Eiffel Tower
-              example: null
-    MessageStatusUpdatedEvent:
-      type: object
-      required:
-      - eventId
-      - event
-      - timestamp
-      - data
-      properties:
-        eventId:
-          type: string
-          description: Unique event identifier.
-          example: evt_0a1b2c3d4e5f6g7h8i9j
-        event:
-          type: string
-          enum:
-          - message.status_updated
-          example: message.status_updated
-        timestamp:
-          type: string
-          format: date-time
-          description: The ISO 8601 timestamp when the event was generated.
-          example: '2026-06-10T14:21:04Z'
-        data:
-          type: object
-          required:
-          - messageId
-          - recipient
-          - status
-          properties:
-            messageId:
-              type: string
-              description: Unique message tracking identifier.
-              example: msg_9a8b7c6d5e4f3g2h1i
-            recipient:
-              type: string
-              description: Handset phone number in E.164 format.
-              example: '+15555551234'
-            status:
-              type: string
-              enum:
-              - Delivered
-              - Read
-              - Failed
-              example: Delivered
-            deliveredAt:
-              type:
-              - string
-              - 'null'
-              format: date-time
-              example: '2026-06-10T14:21:03Z'
-            readAt:
-              type:
-              - string
-              - 'null'
-              format: date-time
-              example: null
-            error:
-              type:
-              - string
-              - 'null'
               example: null
   securitySchemes:
     ApiKeyAuth:

@@ -113,24 +113,6 @@ components:
                   type: integer
                 failed:
                   type: integer
-    CreateCampaignResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-          example: true
-        campaignId:
-          type: string
-          example: camp_1725001234567_4321
-        status:
-          type: string
-          example: Sending
-        recipientSource:
-          type: string
-          example: remote_url
-        contactsUrl:
-          type: string
-          example: https://storage.googleapis.com/crm-exports/customers.csv
     ErrorResponse:
       type: object
       properties:
@@ -189,6 +171,24 @@ components:
         allowSmsFallback:
           type: boolean
           default: false
+    CreateCampaignResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        campaignId:
+          type: string
+          example: camp_1725001234567_4321
+        status:
+          type: string
+          example: Sending
+        recipientSource:
+          type: string
+          example: remote_url
+        contactsUrl:
+          type: string
+          example: https://storage.googleapis.com/crm-exports/customers.csv
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
