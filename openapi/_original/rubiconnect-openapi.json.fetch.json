@@ -1,0 +1,12 @@
+{
+ "url": "https://console.rubiconnect.com/openapi.json",
+ "requested_url": "https://console.rubiconnect.com/openapi.json",
+ "status": 200,
+ "content_type": "application/json; charset=UTF-8",
+ "bytes": 23751,
+ "sha256": "536c46c6b587e2378789e3068293c38c8e50f78dbd4fb86cfd85918214c39dc6",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "byte-identical",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the archived file is byte-identical to what the provider serves."
+}
