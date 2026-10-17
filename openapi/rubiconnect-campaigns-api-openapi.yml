@@ -87,6 +87,15 @@ paths:
       - Campaigns
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: false
+        error:
+          type: string
+          example: 'Invalid or missing parameter: recipient is required.'
     GetCampaignResponse:
       type: object
       properties:
@@ -113,15 +122,6 @@ components:
                   type: integer
                 failed:
                   type: integer
-    ErrorResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-          example: false
-        error:
-          type: string
-          example: 'Invalid or missing parameter: recipient is required.'
     CreateCampaignRequest:
       type: object
       required:
