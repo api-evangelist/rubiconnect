@@ -1,4 +1,4 @@
-# rubiconnect
+# RubiConnect
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -65,3 +65,128 @@
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
 Enterprise business-messaging (CPaaS) platform for RCS Business Messaging and WhatsApp Business, exposing a REST API with a public OpenAPI contract and a hosted MCP server with 18 tools for messaging, campaigns, templates, and analytics.
+
+**Areas:** CPaaS · Communications APIs · Business Messaging · RCS · WhatsApp Business · SMS · Marketing & Campaigns · Conversational AI · MCP · AI Agents
+
+## RubiConnect on APIs.io
+
+Everything profiled for RubiConnect is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/rubiconnect/](https://apis.io/providers/rubiconnect/)** — or go straight to one of the APIs or properties below.
+
+### APIs (5)
+
+- [RubiConnect MCP Server](https://apis.io/apis/rubiconnect/rubiconnect-mcp-server/) — Hosted MCP server exposing 18 tools for messaging, templates, campaigns, agents, analytics, and media. Auth via OAuth 2.0/PKCE or API key.
+- [RubiConnect Campaigns API](https://apis.io/apis/rubiconnect/rubiconnect-campaigns-api/) — The Campaigns API from RubiConnect — 1 operation(s) for campaigns.
+- [RubiConnect Capabilities API](https://apis.io/apis/rubiconnect/rubiconnect-capabilities-api/) — The Capabilities API from RubiConnect — 1 operation(s) for capabilities.
+- [RubiConnect Messages API](https://apis.io/apis/rubiconnect/rubiconnect-messages-api/) — The Messages API from RubiConnect — 1 operation(s) for messages.
+- [RubiConnect Webhooks API](https://apis.io/apis/rubiconnect/rubiconnect-webhooks-api/) — The Webhooks API from RubiConnect — 1 operation(s) for webhooks.
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### AsyncAPI (1)
+
+Event-driven and webhook contracts.
+
+- [Rubiconnect Webhooks](https://apis.io/asyncapis/rubiconnect/rubiconnect-webhooks/)
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [RubiConnect MCP Server](https://apis.io/servers/rubiconnect/rubiconnect-mcp-server/)
+
+#### Overlays (1)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Rubiconnect Openapi Overlay](https://apis.io/overlays/rubiconnect/rubiconnect-openapi-overlay/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Rubiconnect Authentication](https://apis.io/security/rubiconnect/rubiconnect-authentication/)
+- [Rubiconnect Domain Security](https://apis.io/security/rubiconnect/rubiconnect-domain-security/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Rubiconnect Scopes](https://apis.io/scopes/rubiconnect/rubiconnect-scopes/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Rubiconnect Plans Pricing](https://apis.io/plans/rubiconnect/rubiconnect-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Rubiconnect Rate Limits](https://apis.io/rate-limits/rubiconnect/rubiconnect-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.rubiconnect.com/en)
+- [Sign up](https://console.rubiconnect.com/en?view=signUp)
+- [Blog](https://rubiconnect.com/en/blog)
+- [Terms of service](https://rubiconnect.com/en/terms)
+- [Privacy policy](https://rubiconnect.com/en/privacy)
+- [GitHub](https://github.com/zarelan/rubiconnect-mcp)
+
+## API Evangelist rating
+
+**Kin Score 36.5** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 65.0 |
+| Contract quality | 54.1 |
+| Contract governance | 4.5 |
+| Operational transparency | 13.2 |
+| Developer ergonomics | 25.6 |
+| Access clarity | 34.2 |
+
+**Agent readiness 41.8** — agent-ready (gated down from agent-native)
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | documented (partial credit) |
+| Auth Clarity | served (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | derived (partial credit) |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | yes |
+| Agentic Commerce | — |
+
+**Regulatory alignment 40.0** — Telecommunications
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/rubiconnect/](https://apis.io/providers/rubiconnect/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for RubiConnect: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/rubiconnect/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
